@@ -11,6 +11,12 @@ struct RemocData {
     list: Vec<ListItem>
 }
 
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
+struct ListItem {
+    index: usize,
+    item: String,
+}
+
 #[tokio::main]
 async fn main() {
     futures::join!(connect_client());
@@ -58,10 +64,4 @@ async fn client(mut rx: rch::base::Receiver<RwLock<RemocData>>) {
     assert_eq!(read.field1, 222);
     println!("field1: {}", read.field1);
     println!("list[0].item: {}", read.list[0].item);
-}
-
-#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
-struct ListItem {
-    index: usize,
-    item: String,
 }
