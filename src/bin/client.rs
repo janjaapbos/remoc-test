@@ -48,7 +48,6 @@ async fn client(mut rx: rch::base::Receiver<RwLock<RemocData>>) {
     let rw_lock = rx.recv().await.unwrap().unwrap();
 
     let read = rw_lock.read().await.unwrap();
-    assert_eq!(read.field1, 123);
     println!("field1: {}", read.field1);
     println!("list: {:?}", read.list);
     println!("list[0].item: {}", read.list[0].item);
